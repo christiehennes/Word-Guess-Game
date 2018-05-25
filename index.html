@@ -21,22 +21,31 @@
         <div class="main-game-container">
             <div class="side-game-container">
                 <div class="current-word-title">Current Word</div>
-                <div class="current-guessed-word"></div>
+                    <p id="currentSolvedWord"></p>
             </div>
             <div class="side-game-container">
-                <div class="guesses-remaining">Guesses Remaining: </div>
-                <div class="letters-guessed">Letters Guessed: </div>
+                <div class="results-wrapper">
+                    <p>Guesses Remaining</p>
+                    <p id="guesses-remaining"></p>
+                </div>
+                <div class="results-wrapper">
+                    <p>Letters Guessed</p>
+                    <p id="letters-guessed"></p>
+                </div>
+                    
             </div>
         </div>
         <div class="wins-container">
-            <div class="wins-text-container">Wins:</div>
+            <div class="wins-text-container">
+                <p>Wins</p>
+                <p id="number-wins"></p></div>
             <div class="wins-image-container"></div>
         </div>
     </div>
 
 
 
-    
-    
+    <!-- Loading jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

@@ -38,3 +38,8 @@ h1 {
     width: 100%;
 
 }
+
+.results-wrapper{
+    height: 50%;
+    margin: 10px;
+}
