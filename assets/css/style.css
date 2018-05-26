@@ -1,11 +1,17 @@
-h1 {
-    font-size: 24px;
+body{
+    background-image: url(../images/tree_bark.png);
+}
+
+.border {
+    border: 1px solid gainsboro;
 }
 
 .document-wrapper{
 
     max-width: 960px;
     padding: 25px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +22,7 @@ h1 {
     margin: 10px;
     width: 75%;
     height: 10vh;
-    background-color: aliceblue;
+    background-color: white;
 
     display: flex;
     flex-direction: column;
@@ -24,11 +30,15 @@ h1 {
     align-items: center;
 }
 
+.header-text{
+    margin: 5px;
+}
+
 .main-game-container{
     margin: 10px;
     padding: 20px;
     width: 75%;
-    height: 40vh;
+    height: 30vh;
 
     display: flex;
     justify-content: center;
@@ -37,19 +47,38 @@ h1 {
 .side-game-container{
     margin: 10px;
     text-align: center;
-    background-color: aliceblue;
+    background-color: white;
     width: 100%;
 
 }
 
 .results-wrapper{
-    height: 50%;
-    margin: 10px;
+    height: 40%;
+    margin: 20px;
+}
+.dynamic-variables{
+    margin: 15px;
 }
 
 .wins-container{
     width: 75%;
-    height: 8vh;
-    background-color: aliceblue;
+    height: 12vh;
+    background-color: white;
     text-align: center;
+}
+
+.wins-image-container{
+    margin: 10px;
+    max-width:300px;
+    border: 1px solid gainsboro;
+}
+
+/* Font Styles */
+h1 {
+    font-size: 24px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+p{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

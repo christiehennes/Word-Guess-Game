@@ -14,11 +14,24 @@ let game = {
         "volcano"
     ],
 
+    allImages:
+    [
+        "assets/images/yosemite.jpg",
+        "assets/images/glacier.png",
+        "assets/images/zion.jpg",
+        "assets/images/yellowstone.jpeg",
+        "assets/images/sequoia.jpg",
+        "assets/images/everglades.jpg",
+        "assets/images/volcano.jpg"
+
+    ],
+
     currentWordToGuess: '',
     currentSolvedWord: '',
     guessedLetters: [],
     guessesRemaining: 10,
     wins: 0,
+    numGames: 0,
 
 
     //Begins a new game by initalizing all variables and selecting a word
@@ -31,7 +44,7 @@ let game = {
         this.guessesRemaining = 10;
 
         //Choose a word from array and use as currentWordToGuess
-        this.currentWordToGuess = this.allWords[this.wins];
+        this.currentWordToGuess = this.allWords[this.numGames];
         console.log("Inside initalizegame and word to guess: " + this.currentWordToGuess);
 
         //Initalize the current solved word to be all _
@@ -44,6 +57,7 @@ let game = {
         $('#currentSolvedWord').text(this.currentSolvedWord);
         $('#guesses-remaining').text(this.guessesRemaining);
         $('#letters-guessed').text("");
+        $('#number-wins').text(this.wins);
 
     },
 
@@ -125,6 +139,7 @@ let game = {
 
         //Check to see if the guesses remaining is now zero and reset the game 
         if (this.guessesRemaining === 0){
+            this.numGames = this.numGames = 1;
             this.initalizeGame();
         }
     },
@@ -135,8 +150,11 @@ let game = {
         //Check to see if currentSolvedWord matches the currentWord array 
         if (this.currentSolvedWord.indexOf('_') < 0){
             this.wins = this.wins + 1;
-            this.initalizeGame();
             $('#number-wins').text(this.wins);
+            $('#image').attr('src', this.allImages[this.numGames]);
+            // $("#image").html('<img src =" + this.allImages[this.numGames] +">');
+            this.numGames = this.numGames + 1;
+            this.initalizeGame();
         }
     },
     

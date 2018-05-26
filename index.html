@@ -12,34 +12,43 @@
 <body>
 
     <div class="document-wrapper">
-        <div class="title-container">
-            <div class="title">
+        <div class="title-container border">
+            <div class="header-text">
                 <h1>National Parks Hangman Game</h1>
             </div>
-            <div class="begin-game">Press any button to get started!</div>
+            <div class="header-text">
+                <p>Press any key to get started!</p>
+            </div>
         </div>
         <div class="main-game-container">
-            <div class="side-game-container">
-                <div class="current-word-title">Current Word</div>
-                    <p id="currentSolvedWord"></p>
+            <div class="side-game-container border">
+                <div class="results-wrapper">
+                    <p>Current Word</p>
+                </div>
+                <div class="results-wrapper">
+                    <p id="currentSolvedWord" class="dynamic-variables"></p>
+                </div>
             </div>
-            <div class="side-game-container">
+            <div class="side-game-container border">
                 <div class="results-wrapper">
                     <p>Guesses Remaining</p>
-                    <p id="guesses-remaining"></p>
+                    <p id="guesses-remaining" class="dynamic-variables"></p>
                 </div>
                 <div class="results-wrapper">
                     <p>Letters Guessed</p>
-                    <p id="letters-guessed"></p>
+                    <p id="letters-guessed" class="dynamic-variables"></p>
                 </div>
                     
             </div>
         </div>
-        <div class="wins-container">
-            <div class="wins-text-container">
+        <div class="wins-container border">
+            <div class="results-wrapper">
                 <p>Wins</p>
-                <p id="number-wins"></p></div>
-            <div class="wins-image-container"></div>
+                <p id="number-wins" class="dynamic-variables"></p>
+            </div>
+        </div>
+        <div class="image-container">
+            <img class="wins-image-container" id="image" src="">
         </div>
     </div>
 
