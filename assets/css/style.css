@@ -14,6 +14,9 @@ h1 {
 
 .title-container{
     margin: 10px;
+    width: 75%;
+    height: 10vh;
+    background-color: aliceblue;
 
     display: flex;
     flex-direction: column;
@@ -42,4 +45,11 @@ h1 {
 .results-wrapper{
     height: 50%;
     margin: 10px;
+}
+
+.wins-container{
+    width: 75%;
+    height: 8vh;
+    background-color: aliceblue;
+    text-align: center;
 }

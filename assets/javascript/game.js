@@ -22,6 +22,14 @@ let game = {
 
 
     initalizeGame: function() {
+
+        //Clear all or iniatalize variables
+        this.currentWordToGuess = '';
+        this.currentSolvedWord = '';
+        // this.guessesLettersString = '';
+        this.guessedLetters = [];
+        this.guessesRemaining = 10;
+
         //Choose a word from array and use as currentWordToGuess
         this.currentWordToGuess = this.allWords[this.wins];
         console.log("Inside initalizegame and word to guess: " + this.currentWordToGuess);
@@ -31,14 +39,11 @@ let game = {
             this.currentSolvedWord = this.currentSolvedWord + '_ ';
         }
         console.log("Current solved word: " + this.currentSolvedWord);
-        
-        //Initalize other varibales
-        this.guessedLetters = [];
-        this.guessesRemaining = 10;
 
         //Print all necessary variables to the screen
         $('#currentSolvedWord').text(this.currentSolvedWord);
         $('#guesses-remaining').text(this.guessesRemaining);
+        $('#letters-guessed').text("");
 
     },
 
@@ -92,7 +97,8 @@ let game = {
     },
 
     correctGuess: function(letter){
-        //If the guess is correct, add to the array of currentSolvedWord & check to see if they won the game
+
+        //Add the letter to the display of current solution
         for (let i = 0; i < this.currentWordToGuess.length; i++){ 
 
             if (this.currentWordToGuess[i] === letter){
@@ -100,8 +106,14 @@ let game = {
                 this.currentSolvedWord = this.replaceAt(this.currentSolvedWord, index, letter);
             }
         }
+        //Display current correct guesses to the screen
         $('#currentSolvedWord').text(this.currentSolvedWord);
-                console.log("Inside correctGuess");
+
+        //Check to see if they won the game 
+        if (this.currentSolvedWord.indexOf('_') < 0){
+            this.didWinGame();
+        }
+
     },
 
     incorrectGuess: function(letter){
@@ -122,6 +134,7 @@ let game = {
 
         //Check to see if the guesses remaining is now zero 
         if (this.guessesRemaining === 0){
+            this.initalizeGame();
             console.log("You lost");
         }
 
@@ -130,15 +143,12 @@ let game = {
 
     didWinGame: function(){
         //Check to see if currentSolvedWord matches the currentWord array 
-
-    },
-
-    winGame: function(){
-        //If they win, increase the number of wins, display a picture of the park (?), and initalize the next game 
-    },
-
-    
-
+        if (this.currentSolvedWord.indexOf('_') < 0){
+            this.wins = this.wins + 1;
+            this.initalizeGame();
+            $('#number-wins').text(this.wins);
+        }
+    }    
 
 };
 
