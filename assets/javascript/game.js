@@ -21,12 +21,12 @@ let game = {
     wins: 0,
 
 
+    //Begins a new game by initalizing all variables and selecting a word
     initalizeGame: function() {
 
         //Clear all or iniatalize variables
         this.currentWordToGuess = '';
         this.currentSolvedWord = '';
-        // this.guessesLettersString = '';
         this.guessedLetters = [];
         this.guessesRemaining = 10;
 
@@ -47,55 +47,44 @@ let game = {
 
     },
 
-    replaceAt: function(string, index, replacement){
-        
-        return (string.substr(0, index) + replacement + string.substr(index + replacement.length));
-        
-    },
-
+    //"Master" function to run through whether the letter was previously guessed or not and how to handle
     handleGuessedLetter: function(letter){
 
-        console.log("Letter: " + letter );
-
+        //Check to see if it's a new letter that hasn't been guessed 
         let isNewLetter = this.isNewGuessedLetter(letter);
 
+        //For letters not yet guessed, check to see if it's in the current word
         if(isNewLetter){
             let isLetterinWord = this.isLetterinWord(letter);
 
+            //If the letter is in the word, add it to the correctly guessed letters, display, and check if they won the game
             if(isLetterinWord){
-                //Add it to their solved letters
                 this.correctGuess(letter);
-
             }
             else{
-                //Add it to the list of guessed letters and reduce number of guesses
+                //Add it to the list of guessed letters, reduce number of guesses, and restart if they lost the game
                 this.incorrectGuess(letter);
             }
         }
 
     },
 
+    //Check to see if letter has been guessed before
     isNewGuessedLetter: function(letter){
-        //Check to see if letter has been guessed before
-        //Check to see if this letter is already in the current Solved word  & return result 
-
         if (!this.currentSolvedWord.includes(letter)){
             if (!this.guessedLetters.includes(letter)){
                 return true;
             }
         }
-        return false;
-        
+        return false;   
     },
 
+    //Check to see if letter is in the word that is trying to be guessed 
     isLetterinWord: function(letter){
-        //Check to see if letter is in the word that is trying to be guessed 
-        //return true/false
-        console.log("Is this letter in the word? " + this.currentWordToGuess.includes(letter));
-
         return this.currentWordToGuess.includes(letter);
     },
 
+    //Handle correct guesses
     correctGuess: function(letter){
 
         //Add the letter to the display of current solution
@@ -106,6 +95,7 @@ let game = {
                 this.currentSolvedWord = this.replaceAt(this.currentSolvedWord, index, letter);
             }
         }
+
         //Display current correct guesses to the screen
         $('#currentSolvedWord').text(this.currentSolvedWord);
 
@@ -113,11 +103,12 @@ let game = {
         if (this.currentSolvedWord.indexOf('_') < 0){
             this.didWinGame();
         }
-
     },
 
+    //Handle an incorrect guess
     incorrectGuess: function(letter){
-        //If the guess is incorrect, reduce number of guesses and add/display in guessed letters and check if game is over 
+
+        //If the guess is incorrect, reduce number of guesses and add/display in guessed letters 
         this.guessesRemaining = this.guessesRemaining - 1;
         this.guessedLetters.push(letter);
 
@@ -132,23 +123,27 @@ let game = {
         guessesLettersString = guessesLettersString + this.guessedLetters[this.guessedLetters.length - 1];
         $('#letters-guessed').text(guessesLettersString);
 
-        //Check to see if the guesses remaining is now zero 
+        //Check to see if the guesses remaining is now zero and reset the game 
         if (this.guessesRemaining === 0){
             this.initalizeGame();
-            console.log("You lost");
         }
-
-
     },
 
+    //Check to see if they won the game
     didWinGame: function(){
+
         //Check to see if currentSolvedWord matches the currentWord array 
         if (this.currentSolvedWord.indexOf('_') < 0){
             this.wins = this.wins + 1;
             this.initalizeGame();
             $('#number-wins').text(this.wins);
         }
-    }    
+    },
+    
+    //Function to change letters at certain positions
+    replaceAt: function(string, index, replacement){
+        return (string.substr(0, index) + replacement + string.substr(index + replacement.length));  
+    },
 
 };
 
