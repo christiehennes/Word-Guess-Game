@@ -17,7 +17,7 @@ let game = {
     currentWordToGuess: '',
     currentSolvedWord: '',
     guessedLetters: [],
-    guessesRemaining: 15,
+    guessesRemaining: 10,
     wins: 0,
 
 
@@ -34,12 +34,18 @@ let game = {
         
         //Initalize other varibales
         this.guessedLetters = [];
-        this.guessesRemaining = 15;
+        this.guessesRemaining = 10;
 
         //Print all necessary variables to the screen
         $('#currentSolvedWord').text(this.currentSolvedWord);
         $('#guesses-remaining').text(this.guessesRemaining);
 
+    },
+
+    replaceAt: function(string, index, replacement){
+        
+        return (string.substr(0, index) + replacement + string.substr(index + replacement.length));
+        
     },
 
     handleGuessedLetter: function(letter){
@@ -53,9 +59,12 @@ let game = {
 
             if(isLetterinWord){
                 //Add it to their solved letters
+                this.correctGuess(letter);
+
             }
             else{
                 //Add it to the list of guessed letters and reduce number of guesses
+                this.incorrectGuess(letter);
             }
         }
 
@@ -82,13 +91,41 @@ let game = {
         return this.currentWordToGuess.includes(letter);
     },
 
-    incorrectGuess: function(letter){
-        //If the guess is incorrect, reduce number of guesses and add/display in guessed letters
+    correctGuess: function(letter){
+        //If the guess is correct, add to the array of currentSolvedWord & check to see if they won the game
+        for (let i = 0; i < this.currentWordToGuess.length; i++){ 
 
+            if (this.currentWordToGuess[i] === letter){
+                let index = i * 2;
+                this.currentSolvedWord = this.replaceAt(this.currentSolvedWord, index, letter);
+            }
+        }
+        $('#currentSolvedWord').text(this.currentSolvedWord);
+                console.log("Inside correctGuess");
     },
 
-    correctGuess: function(letter){
-        //If the guess is correct, add to the array of currentSolvedWord & check to see if they won the game 
+    incorrectGuess: function(letter){
+        //If the guess is incorrect, reduce number of guesses and add/display in guessed letters and check if game is over 
+        this.guessesRemaining = this.guessesRemaining - 1;
+        this.guessedLetters.push(letter);
+
+        //Display Guesses Remaining to the screen
+        $('#guesses-remaining').text(this.guessesRemaining);
+
+        //Display Guessed Letters to the screen
+        let guessesLettersString = '';
+        for(let i = 0; i < this.guessedLetters.length - 1; i++){
+            guessesLettersString = guessesLettersString + this.guessedLetters[i] + ', ';
+        }
+        guessesLettersString = guessesLettersString + this.guessedLetters[this.guessedLetters.length - 1];
+        $('#letters-guessed').text(guessesLettersString);
+
+        //Check to see if the guesses remaining is now zero 
+        if (this.guessesRemaining === 0){
+            console.log("You lost");
+        }
+
+
     },
 
     didWinGame: function(){
@@ -98,7 +135,9 @@ let game = {
 
     winGame: function(){
         //If they win, increase the number of wins, display a picture of the park (?), and initalize the next game 
-    }
+    },
+
+    
 
 
 };
